@@ -1,0 +1,62 @@
+Question
+Write a program to implement Thread Synchronization
+Source Code
+class Counter {
+    private int count = 0;
+    // Synchronized method to increment the counter
+    public synchronized void increment() {
+        count++;
+    }
+    // Synchronized method to decrement the counter
+    public synchronized void decrement() {
+        count--;
+    }
+    public int getCount() {
+        return count;
+    }
+}
+class IncrementThread extends Thread {
+    private Counter counter;
+    public IncrementThread(Counter counter) {
+        this.counter = counter;
+    }
+    @Override
+    public void run() {
+        for (int i = 0; i < 10000; i++) {
+            counter.increment();
+        }
+    }
+}
+class DecrementThread extends Thread {
+    private Counter counter;
+    public DecrementThread(Counter counter) {
+        this.counter = counter;
+    }
+    @Override
+    public void run() {
+        for (int i = 0; i < 10000; i++) {
+            counter.decrement();
+        }
+    }
+}
+public class ThreadSynchronization {
+    public static void main(String[] args) throws InterruptedException {
+        Counter counter = new Counter();
+        IncrementThread incrementThread = new IncrementThread(counter);
+        DecrementThread decrementThread = new DecrementThread(counter);
+        incrementThread.start();
+        decrementThread.start();
+        incrementThread.join();
+        decrementThread.join();
+        System.out.println("Final Counter Value: " + counter.getCount());
+    }
+}
+
+disc:
+The provided program demonstrates thread synchronization using a shared `Counter` object. The `increment` and `decrement` methods of the `Counter` class are synchronized to ensure that only one thread can access these methods at a time, preventing potential data inconsistencies.
+
+Two separate threads (`IncrementThread` and `DecrementThread`) increment and decrement the counter, respectively. The `main` method of the `ThreadSynchronization` class creates instances of these threads, starts their execution, and then waits for their completion using the `join` method.
+
+Finally, it prints the final counter value, demonstrating that the synchronization ensures proper coordination between the threads, preventing race conditions.
+
+In summary, the program uses synchronized methods to implement thread synchronization, ensuring the integrity of shared data in a multi-threaded environment.

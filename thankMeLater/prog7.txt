@@ -1,0 +1,113 @@
+1. Abstract class Figure
+
+abstract class Figure {
+    // Abstract method for calculating area
+    abstract double calculateArea();
+
+    // Abstract method for calculating volume
+    abstract double calculateVolume();
+}
+
+// Circle class extending Figure
+class Circle extends Figure {
+    private double radius;
+
+    // Constructor
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    // Implementing abstract method for calculating area (circle)
+    @Override
+    double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+
+    // Implementing abstract method for calculating volume (not applicable for circle)
+    @Override
+    double calculateVolume() {
+        return 0;
+    }
+}
+
+// Sphere class extending Figure
+class Sphere extends Figure {
+    private double radius;
+
+    // Constructor
+    public Sphere(double radius) {
+        this.radius = radius;
+    }
+
+    // Implementing abstract method for calculating area (surface area of a sphere)
+    @Override
+    double calculateArea() {
+        return 4 * Math.PI * radius * radius;
+    }
+
+    // Implementing abstract method for calculating volume (volume of a sphere)
+    @Override
+    double calculateVolume() {
+        return (4.0 / 3) * Math.PI * radius * radius * radius;
+    }
+}
+
+// Main class
+public class pr7 {
+    public static void main(String[] args) {
+        // Creating objects of different types
+        Figure circle = new Circle(5.0);
+        Figure sphere = new Sphere(3.0);
+
+        // Using dynamic method dispatch to call the appropriate methods
+        System.out.println("Area of Circle: " + circle.calculateArea());
+        System.out.println("Volume of Circle: " + circle.calculateVolume());
+
+        System.out.println("Area of Sphere: " + sphere.calculateArea());
+        System.out.println("Volume of Sphere: " + sphere.calculateVolume());
+    }
+}
+
+2. Interface and abstract class
+
+interface IFSC {
+    void displayIFSC();
+}
+interface Branch {
+    void displayBranch();
+}
+abstract class Bank {
+    abstract void displayBankName();
+}
+class SBI extends Bank implements IFSC, Branch {
+    @Override
+    public void displayIFSC() {
+        System.out.println("IFS Code: SBI0123456789");
+    }
+
+    @Override
+    public void displayBranch() {
+        System.out.println("Branch Name: Kolkata");
+    }
+
+    @Override
+    void displayBankName() {
+        System.out.println("Bank Name: State Bank of India");
+    }
+}
+
+public class pr7 {
+    public static void main(String[] args) {
+        SBI kolkata = new SBI();
+        kolkata.displayBankName();
+        kolkata.displayIFSC();
+        kolkata.displayBranch();
+    }
+}
+
+disc:
+In the first code snippet, an abstract class `Figure` is defined with abstract methods `calculateArea()` and `calculateVolume()`. Two concrete classes, `Circle` and `Sphere`, extend the `Figure` class and implement these abstract methods. The `main` method in the `pr7` class demonstrates the use of dynamic method dispatch to call the appropriate methods for objects of different types (circle and sphere).
+
+In the second code snippet, an interface `IFSC` and another interface `Branch` are defined, both containing a single method. An abstract class `Bank` is also defined with an abstract method. The `SBI` class extends `Bank` and implements both interfaces. The `main` method in the `pr7` class creates an object of the `SBI` class and calls methods from the interfaces and the abstract class.
+
+Both code snippets showcase the concepts of abstraction, inheritance, and polymorphism in Java. The first snippet demonstrates the use of abstract classes and dynamic method dispatch, while the second snippet illustrates the combination of an abstract class and interfaces in a class hierarchy.

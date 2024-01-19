@@ -1,0 +1,168 @@
+1.
+
+class Employee {
+    int emp_id;
+    String name;
+    double salary;
+    String designation;
+    static int emp_count = 0;
+    final static double BASE_SALARY = 25000;
+
+    public Employee(String name) {
+        emp_count++;
+        this.emp_id = 1;
+        this.name = name;
+        this.salary = BASE_SALARY;
+        this.designation = "Freshers";
+    }
+
+    public Employee(String name, double salary, String designation) {
+        emp_count++;
+        this.emp_id = 2;
+        this.name = name;
+        this.salary = salary;
+        this.designation = designation;
+    }
+
+    public Employee() {
+        emp_count++;
+        this.emp_id = 3;
+        this.name = "Temporary Employee";
+        this.salary = 15000;
+        this.designation = "Temporary";
+    }
+
+    public static int getEmp_count() {
+        return emp_count;
+    }
+
+    public static void displayEmployeeCount() {
+        System.out.println("Total Employees: " + emp_count);
+    }
+
+    public static Employee compareSalary(Employee employee1, Employee employee2) {
+        if(employee2.salary>employee1.salary)
+            return employee2;
+        else
+            return employee1;
+    }
+
+    public static Employee compareDesignation(Employee employee1, Employee employee2) {
+        return (employee1.designation.compareTo(employee2.designation) > 0) ? employee1 : employee2;
+    }
+}
+
+public class pr1 {
+    public static void main(String[] args) {
+        Employee[] employees = new Employee[3];
+        employees[0] = new Employee("Soumik Saha");
+        employees[1] = new Employee("Tathagata Pal", 50000, "SDE-I");
+        employees[2] = new Employee();
+
+        for(Employee emp : employees) {
+            System.out.println(emp.emp_id + " " + emp.name + " " + emp.salary + " " + emp.designation);
+        }
+
+        Employee.displayEmployeeCount();
+
+        Employee emp1 = Employee.compareSalary(employees[0], employees[1]);
+        System.out.println("Employee with Higher Salary: " + emp1.name);
+        Employee emp2 = Employee.compareDesignation(employees[0], employees[2]);
+        System.out.println("Employee with Higher Designation: " + emp2.name);
+    }
+}
+
+
+diss:
+The provided code defines an `Employee` class along with a `pr1` class demonstrating the use of this class. Let's break down the key features of the code:
+
+### Employee Class:
+
+1. **Instance Variables:**
+   - `emp_id`: Represents the employee ID.
+   - `name`: Represents the employee's name.
+   - `salary`: Represents the employee's salary.
+   - `designation`: Represents the employee's designation.
+
+2. **Static Variables:**
+   - `emp_count`: A static variable to keep track of the total number of employees.
+   - `BASE_SALARY`: A final static variable representing the base salary for all employees.
+
+3. **Constructors:**
+   - Three constructors with different parameter sets to initialize instances of the `Employee` class. Each constructor increments the `emp_count`.
+
+4. **Static Methods:**
+   - `getEmp_count()`: Returns the total number of employees.
+   - `displayEmployeeCount()`: Prints the total number of employees.
+
+5. **Static Comparison Methods:**
+   - `compareSalary(Employee employee1, Employee employee2)`: Compares the salaries of two employees and returns the one with the higher salary.
+   - `compareDesignation(Employee employee1, Employee employee2)`: Compares the designations of two employees using string comparison and returns the one with the higher designation.
+
+### pr1 Class:
+
+1. **Main Method:**
+   - Creates an array of `Employee` objects.
+   - Initializes three employees using different constructors.
+   - Prints the details of each employee using a for-each loop.
+
+2. **Static Method Calls:**
+   - Calls `displayEmployeeCount()` to print the total number of employees.
+   - Calls `compareSalary()` to find and print the employee with the higher salary.
+   - Calls `compareDesignation()` to find and print the employee with the higher designation.
+
+### Usage:
+
+- The program demonstrates the creation of employee objects, counting the total number of employees, and comparing employees based on salary and designation.
+
+- The use of static variables and methods allows for tracking information at the class level rather than the instance level.
+
+- The program outputs details of each employee, the total number of employees, the employee with the higher salary, and the employee with the higher designation.
+
+Overall, this code provides a simple representation of an employee management system with features like tracking employee count and comparing employee attributes.
+
+2. Write a java program to illustrate - “Java uses pass by value”
+
+public class pr1 {
+
+    public static void main(String[] args) {
+        int number = 10;
+
+        System.out.println("Before calling modifyValue method: " + number);
+
+        // Call the method passing the number
+        modifyValue(number);
+
+        System.out.println("After calling modifyValue method: " + number);
+    }
+
+    // A method that modifies the parameter value
+    public static void modifyValue(int value) {
+        System.out.println("Inside modifyValue method - Before modification: " + value);
+
+        // Modifying the parameter value
+        value = 20;
+
+        System.out.println("Inside modifyValue method - After modification: " + value);
+    }
+}
+
+disc:
+
+In the `main` method:
+
+1. An integer variable `number` is initialized with the value 10.
+2. The value of `number` is printed before calling the `modifyValue` method.
+3. The `modifyValue` method is called, passing the value of `number` as an argument.
+4. The value of `number` is printed again after the method call.
+
+In the `modifyValue` method:
+
+1. The method takes an integer parameter named `value`.
+2. The current value of the parameter is printed before modification.
+3. The parameter's value is then modified to 20.
+4. The modified value of the parameter is printed.
+
+However, when you run the program, you will notice that the value of `number` in the `main` method remains unchanged after calling the `modifyValue` method. This is because Java uses pass-by-value, which means that a copy of the argument is passed to the method. Changes made to the parameter inside the method do not affect the original variable outside the method.
+
+So, in this example, although the `value` parameter is modified inside the `modifyValue` method, it does not affect the original variable `number` in the `main` method. This highlights the distinction between pass-by-value and pass-by-reference in Java.

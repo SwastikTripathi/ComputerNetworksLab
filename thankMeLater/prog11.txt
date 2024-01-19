@@ -1,0 +1,68 @@
+Question: Write a program to create multiple threads by using thread class.Usejoin(), isAlive(), getPriority(), SetPriority() methods
+SOURCE CODE:
+    public class ThreadExample {
+        public static void main(String[] args) {
+            Thread thread1 = new Thread(new MyRunnable("Thread 1", 1));
+            Thread thread2 = new Thread(new MyRunnable("Thread 2", 2));
+            thread1.start();
+            thread2.start();
+            try {
+                thread1.join();
+                thread2.join();
+                System.out.println("Is thread 1 alive? " + thread1.isAlive());
+                System.out.println("Is thread 2 alive? " + thread2.isAlive());
+                System.out.println("Thread 1 priority: " + thread1.getPriority());
+                System.out.println("Thread 2 priority: " + thread2.getPriority());
+                thread1.setPriority(1);
+                thread2.setPriority(2);
+                System.out.println("Updated Thread 1 priority: " + thread1.getPriority());
+                System.out.println("Updated Thread 2 priority: " + thread2.getPriority());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        static class MyRunnable implements Runnable {
+            private String name;
+            private int delay;
+            public MyRunnable(String name, int delay) {
+                this.name = name;
+                this.delay = delay;
+            }
+            @Override
+            public void run() {
+                int count = 0;
+                while (count < 5) {
+                    try {
+                        Thread.sleep(delay * 1000);
+                        count++;
+                        System.out.println("Thread " + name + " running");
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+disc.
+The provided program demonstrates the creation of multiple threads using the Thread class in Java. It uses the `join()`, `isAlive()`, `getPriority()`, and `setPriority()` methods to manage and inquire about the threads' behavior. The program defines a main class `ThreadExample` and an inner class `MyRunnable` that implements the Runnable interface. The `main` method creates two threads, starts them, and then uses various methods to manipulate and query their states.
+
+1. **`Thread thread1 = new Thread(new MyRunnable("Thread 1", 1));`**: Creates the first thread with a given name and delay.
+
+2. **`thread1.start();`**: Starts the execution of the first thread.
+
+3. **`thread1.join();`**: Waits for the first thread to complete before moving on.
+
+4. **`System.out.println("Is thread 1 alive? " + thread1.isAlive());`**: Checks if the first thread is still alive.
+
+5. **`System.out.println("Thread 1 priority: " + thread1.getPriority());`**: Gets the priority of the first thread.
+
+6. **`thread1.setPriority(1);`**: Sets a new priority for the first thread.
+
+7. **`System.out.println("Updated Thread 1 priority: " + thread1.getPriority());`**: Gets and prints the updated priority of the first thread.
+
+Similar operations are performed for the second thread (`thread2`).
+
+The `MyRunnable` class defines a simple runnable task that runs for a certain number of iterations, simulating some work with a delay.
+
+The program showcases basic thread manipulation and information retrieval using the mentioned methods.

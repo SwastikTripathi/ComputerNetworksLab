@@ -1,0 +1,106 @@
+1. Scanner
+
+import java.util.*;
+
+public class pr2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter your name: ");
+        String name = sc.nextLine();
+        System.out.println("Enter your Date of Birth: ");
+        int year = sc.nextInt();
+        System.out.println("Name: "+name+" DOB: "+year);
+
+
+    }
+}
+
+2. BufferReader, BufferWriter, System class
+import java.io.*;
+
+public class pr2 {
+    public static void main(String[] args) throws Exception{
+
+        FileReader fr = new FileReader("temp.txt");
+        BufferedReader br = new BufferedReader(fr);
+
+        String line;
+        while((line = br.readLine()) != null) {
+            System.out.println(line);
+        }
+        br.close();
+        System.out.println();
+
+        InputStreamReader r = new InputStreamReader(System.in);
+        BufferedReader br2 = new BufferedReader(r);
+        System.out.println("Enter a line to be written into the line: ");
+        String addLine = br2.readLine();
+        FileWriter fw= new FileWriter("temp.txt", true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.newLine();
+        bw.write(addLine);
+        bw.close();
+
+        System.out.println("AFTER WRITING: ");
+        FileReader fr2 =new FileReader("temp.txt");
+        BufferedReader br3 = new BufferedReader(fr2);
+
+        while((line = br3.readLine())!=null) {
+            System.out.println(line);
+        }
+        br3.close();
+
+    }
+}
+
+disc:
+ **Scanner:**
+   The `Scanner` class is part of the `java.util` package and is commonly used for reading input from various sources. In the provided code, a `Scanner` object (`sc`) is created to read input from the standard input stream (`System.in`). It prompts the user to enter their name and date of birth, reads the input using `nextLine()` and `nextInt()` methods, and then prints the entered values.
+
+
+ **BufferedReader, BufferedWriter, System class:**
+   The second code snippet demonstrates the use of `BufferedReader` and `BufferedWriter` classes for reading from and writing to a file, as well as the usage of the `System` class for reading from the console.
+
+   - `BufferedReader` is used to read lines from a file (`temp.txt`) in the first part of the code.
+   - `BufferedWriter` is used to append a line to the same file in the second part of the code.
+   - `System.in` is wrapped in an `InputStreamReader`, and then a `BufferedReader` is used to read a line from the console.
+
+
+   This code showcases file reading, writing, and console input operations using `BufferedReader`, `BufferedWriter`, and `System` classes, respectively. Additionally, it demonstrates the use of exception handling (`throws Exception`).
+3. Simple Calculator in Command Line Arguments
+public class pr3 {
+    public static void main(String[] args) {
+        double operand1 = Double.parseDouble(args[0]), operand2 = Double.parseDouble(args[2]);
+        String operator = args[1];
+        switch (operator) {
+            case "+":
+                System.out.println(operand1+operand2);
+                break;
+            case "-":
+                System.out.println(operand1-operand2);
+                break;
+            case "*":
+                System.out.println(operand1*operand2);
+                break;
+            case "/":
+                System.out.println(operand1/operand2);
+                break;
+            default:
+                System.out.println("Wrong Choice");
+        }
+    }
+}
+
+disc:
+The provided code represents a simple command-line calculator in Java. It takes three command-line arguments: two operands and an operator. It then performs the corresponding arithmetic operation based on the operator and prints the result.
+
+Here's a brief overview:
+
+In this code:
+
+- It uses `Double.parseDouble` to convert the command-line arguments (assumed to be strings representing numbers) into double values.
+- The operator is determined from the second command-line argument (`args[1]`).
+- A switch statement is used to perform the corresponding arithmetic operation based on the operator.
+- The result is printed to the console.
+
+Note: This calculator assumes that the input will always be in the correct format (two operands and one operator) and does not include error handling for cases where the input is invalid.

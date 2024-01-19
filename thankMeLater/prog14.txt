@@ -1,0 +1,62 @@
+QUESTION: Write a java program to illustrate interthread communication using
+Producer Consumer Problem
+SOURCE CODE:
+    import java.util.LinkedList;
+class Buffer {
+    private LinkedList < Integer > buffer = new LinkedList < > ();
+    private int capacity;
+    Buffer(int capacity) {
+        this.capacity = capacity;
+    }
+    public void produce() throws InterruptedException {
+        int value = 0;
+        while (true) {
+            synchronized(this) {
+                while (buffer.size() == capacity) {
+                    wait();
+                }
+                System.out.println("Producer produced-" + value);
+                buffer.add(value++);
+                notify();
+                Thread.sleep(1000);
+            }
+        }
+    }
+    public void consume() throws InterruptedException {
+        while (true) {
+            synchronized(this) {
+                while (buffer.size() == 0) {
+                    wait();
+                }
+                int val = buffer.removeFirst();
+                System.out.println("Consumer consumed-" + val);
+                notify();
+                Thread.sleep(1000);
+            }
+        }
+    }
+}
+public class PCE {
+    public static void main(String[] args) {
+        Buffer buffer = new Buffer(2);
+        Thread producerThread = new Thread(() - > {
+            try {
+                buffer.produce();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        Thread consumerThread = new Thread(() - > {
+            try {
+                buffer.consume();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        producerThread.start();
+        consumerThread.start();
+    }
+}
+
+disc.
+The provided Java program illustrates the Producer-Consumer problem, demonstrating inter-thread communication using a shared buffer. The `Buffer` class contains methods for producing and consuming items, and the `PCE` class creates two threads for the producer and consumer, respectively. The `wait()` and `notify()` methods are used to synchronize and communicate between the producer and consumer threads, ensuring proper execution of the Producer-Consumer problem.

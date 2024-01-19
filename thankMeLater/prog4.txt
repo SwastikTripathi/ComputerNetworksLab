@@ -1,0 +1,236 @@
+1. APIs for String
+
+public class pr4 {
+    public static void main(String[] args) {
+        // Initialize a String
+        String str1 = "Hello, World!";
+
+        // charAt()
+        char charAtIndex = str1.charAt(7);
+        System.out.println("charAt(7): " + charAtIndex);
+
+        // compareTo()
+        String str2 = "Hello, Universe!";
+        int compareToResult = str1.compareTo(str2);
+        System.out.println("compareTo(str2): " + compareToResult);
+
+        // equals()
+        boolean equalsResult = str1.equals(str2);
+        System.out.println("equals(str2): " + equalsResult);
+
+        // equalsIgnoreCase()
+        boolean equalsIgnoreCaseResult = str1.equalsIgnoreCase("hello, world!");
+        System.out.println("equalsIgnoreCase('hello, world!'): " + equalsIgnoreCaseResult);
+
+        // indexOf()
+        int indexOfResult = str1.indexOf("World");
+        System.out.println("indexOf('World'): " + indexOfResult);
+
+        // length()
+        int lengthResult = str1.length();
+        System.out.println("length(): " + lengthResult);
+
+        // substring()
+        String substringResult = str1.substring(7,9);
+        System.out.println("substring(7): " + substringResult);
+
+        // toCharArray()
+        char[] charArrayResult = str1.toCharArray();
+        System.out.print("toCharArray(): ");
+        for (char c : charArrayResult) {
+            System.out.print(c + " ");
+        }
+        System.out.println();
+
+        // toLowerCase()
+        String toLowerCaseResult = str1.toLowerCase();
+        System.out.println("toLowerCase(): " + toLowerCaseResult);
+
+        // toString()
+        String toStringResult = str1.toString();
+        System.out.println("toString(): " + toStringResult);
+
+        // toUpperCase()
+        String toUpperCaseResult = str1.toUpperCase();
+        System.out.println("toUpperCase(): " + toUpperCaseResult);
+
+        // trim()
+        String stringWithSpaces = "    Trim Me    ";
+        String trimResult = stringWithSpaces.trim();
+        System.out.println("trim(): '" + trimResult + "'");
+
+        // valueOf()
+        int number = 42;
+        String valueOfResult = String.valueOf(number);
+        System.out.println("valueOf(42): " + valueOfResult);
+    }
+}
+
+2. APIS for StringBuffer
+
+public class pr4 {
+    public static void main(String[] args) {
+        // Creating a StringBuffer
+        StringBuffer stringBuffer = new StringBuffer("Hello");
+
+        // append() - Concatenates the given argument to the end
+        stringBuffer.append(" World");
+        System.out.println("1. append(): " + stringBuffer);
+
+        // capacity() - Returns the current capacity
+        System.out.println("2. capacity(): " + stringBuffer.capacity());
+
+        // charAt() - Returns the character at the specified index
+        System.out.println("3. charAt(1): " + stringBuffer.charAt(1));
+
+        // delete() - Deletes characters from a specified start index to end index
+        stringBuffer.delete(5, 11);
+        System.out.println("4. delete(5, 11): " + stringBuffer);
+
+        // deleteCharAt() - Deletes the character at a specified index
+        stringBuffer.deleteCharAt(0);
+        System.out.println("5. deleteCharAt(0): " + stringBuffer);
+
+        // ensureCapacity() - Ensures that the capacity is at least equal to the specified minimum
+        stringBuffer.ensureCapacity(20);
+        System.out.println("6. ensureCapacity(20): " + stringBuffer);
+
+        // getChars() - Copies characters into a destination character array
+        char[] dest = new char[10];
+        stringBuffer.getChars(0, 4, dest, 0);
+        System.out.print("7. getChars(): ");
+        System.out.println(dest);
+
+        // indexOf() - Returns the index within the StringBuffer of the first occurrence of a specified substring
+        System.out.println("8. indexOf(\"World\"): " + stringBuffer.indexOf("World"));
+
+        // insert() - Inserts the string representation of a specified argument at a specified position
+        stringBuffer.insert(4, "S");
+        System.out.println("9. insert(, \" \"): " + stringBuffer);
+
+        // length() - Returns the length (number of characters) of the StringBuffer
+        System.out.println("10. length(): " + stringBuffer.length());
+
+        // setCharAt() - Sets the character at a specified index to a new character
+        stringBuffer.setCharAt(0, 'h');
+        System.out.println("11. setCharAt(0, 'h'): " + stringBuffer);
+
+        // setLength() - Sets the length of the StringBuffer
+        stringBuffer.setLength(5);
+        System.out.println("12. setLength(5): " + stringBuffer);
+
+        // substring() - Returns a new string that is a substring of this StringBuffer
+        System.out.println("13. substring(0, 2): " + stringBuffer.substring(0, 2));
+
+        // toString() - Converts the StringBuffer to a String
+        String result = stringBuffer.toString();
+        System.out.println("14. toString(): " + result);
+    }
+}
+
+3. Write a java program for explaining the concept of mutable and immutable string.
+
+public class pr4 {
+    public static void main(String[] args) {
+        // Immutable String
+        String immutableString = "Hello";
+        System.out.println("Immutable String (before modification): " + immutableString);
+
+        // Concatenating strings creates a new string
+        immutableString = immutableString.concat(" World");
+        System.out.println("Immutable String (after modification): " + immutableString);
+
+        // Original string remains unchanged
+        System.out.println("Original Immutable String: " + "Hello");
+
+        System.out.println("\n--------------------------------------\n");
+
+        // Mutable String (StringBuilder)
+        StringBuilder mutableString = new StringBuilder("Hello");
+        System.out.println("Mutable String (before modification): " + mutableString);
+
+        // Appending/modifying StringBuilder in-place
+        mutableString.append(" World");
+        System.out.println("Mutable String (after modification): " + mutableString);
+
+        // Original StringBuilder is modified
+        System.out.println("Original Mutable String: " + mutableString);
+
+        System.out.println("\n--------------------------------------\n");
+
+        // Immutable String behavior in method calls
+        String original = "Java";
+        System.out.println("Original String: " + original);
+        modifyString(original);
+        System.out.println("After modifying in method: " + original); // Original string is unchanged
+
+        System.out.println("\n--------------------------------------\n");
+
+        // Mutable String (StringBuilder) behavior in method calls
+        StringBuilder mutableOriginal = new StringBuilder("Java");
+        System.out.println("Original Mutable String: " + mutableOriginal);
+        modifyStringBuilder(mutableOriginal);
+        System.out.println("After modifying in method: " + mutableOriginal); // Original StringBuilder is modified
+    }
+
+    // Modifying Immutable String in a method
+    private static void modifyString(String str) {
+        str = str.concat(" is fun");
+        System.out.println("Inside method - Modified String: " + str);
+    }
+
+    // Modifying Mutable String (StringBuilder) in a method
+    private static void modifyStringBuilder(StringBuilder sb) {
+        sb.append(" is fun");
+        System.out.println("Inside method - Modified StringBuilder: " + sb);
+    }
+}
+
+discussion:
+1. **APIs for String:**
+   - `charAt(int index)`: Returns the character at the specified index.
+   - `compareTo(String str)`: Compares this string to another string lexicographically.
+   - `equals(Object obj)`: Compares this string to another object for equality.
+   - `equalsIgnoreCase(String anotherString)`: Compares this string to another string, ignoring case considerations.
+   - `indexOf(String str)`: Returns the index within this string of the first occurrence of the specified substring.
+   - `length()`: Returns the length of this string.
+   - `substring(int beginIndex, int endIndex)`: Returns a substring of this string.
+   - `toCharArray()`: Converts this string to a new character array.
+   - `toLowerCase()`: Converts all the characters in this string to lowercase.
+   - `toString()`: Returns a string representation of this object.
+   - `toUpperCase()`: Converts all the characters in this string to uppercase.
+   - `trim()`: Returns a copy of this string with leading and trailing whitespaces removed.
+   - `valueOf(int i)`: Returns the string representation of the specified integer.
+
+2. **APIs for StringBuffer:**
+   - `append(String str)`: Concatenates the given argument to the end of the StringBuffer.
+   - `capacity()`: Returns the current capacity of the StringBuffer.
+   - `charAt(int index)`: Returns the character at the specified index in the StringBuffer.
+   - `delete(int start, int end)`: Deletes characters from a specified start index to an end index.
+   - `deleteCharAt(int index)`: Deletes the character at a specified index.
+   - `ensureCapacity(int minimumCapacity)`: Ensures that the capacity is at least equal to the specified minimum capacity.
+   - `getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin)`: Copies characters into a destination character array.
+   - `indexOf(String str)`: Returns the index within the StringBuffer of the first occurrence of a specified substring.
+   - `insert(int offset, String str)`: Inserts the string representation of a specified argument at a specified position.
+   - `length()`: Returns the length (number of characters) of the StringBuffer.
+   - `setCharAt(int index, char ch)`: Sets the character at a specified index to a new character.
+   - `setLength(int newLength)`: Sets the length of the StringBuffer.
+   - `substring(int start, int end)`: Returns a new string that is a substring of this StringBuffer.
+   - `toString()`: Converts the StringBuffer to a String.
+
+3. **Mutable and Immutable String:**
+   - **Immutable String:**
+     - Strings in Java are immutable, meaning their values cannot be changed after creation.
+     - Any operation that appears to modify a string actually creates a new string.
+     - Example: `String immutableString = "Hello";`
+   
+   - **Mutable String (StringBuilder):**
+     - `StringBuilder` is mutable, allowing modifications to the existing object without creating a new one.
+     - Operations like `append`, `delete`, and `insert` modify the same `StringBuilder` object.
+     - Example: `StringBuilder mutableString = new StringBuilder("Hello");`
+   
+   - **Behavior in Method Calls:**
+     - Immutable strings, when passed to a method, cannot be modified inside the method.
+     - Mutable strings (StringBuilder) can be modified inside a method, and the changes persist outside the method.
+     - Example in the provided code demonstrates these behaviors.
+

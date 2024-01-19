@@ -1,0 +1,138 @@
+1. Package
+
+Sure, let's create a simple Java program to illustrate creating a package, importing classes from the package, and using them in another class.
+
+Let's say we have a package named `com.example.geometry` with two classes: `Circle` and `Rectangle`. We'll also create a `Main` class outside the package to demonstrate importing and using the classes.
+
+Here's the directory structure:
+
+```plaintext
+src
+└── com
+    └── example
+        └── geometry
+            ├── Circle.java
+            └── Rectangle.java
+Main.java
+```
+
+	1. **Circle.java:**
+
+```java
+package com.example.geometry;
+
+public class Circle {
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+}
+```
+
+	2. **Rectangle.java:**
+
+```java
+package com.example.geometry;
+
+public class Rectangle {
+    private double length;
+    private double width;
+
+    public Rectangle(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+
+    public double calculateArea() {
+        return length * width;
+    }
+}
+```
+
+	3. **Main.java:**
+
+```java
+import com.example.geometry.Circle;
+import com.example.geometry.Rectangle;
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating objects from the imported classes
+        Circle circle = new Circle(5.0);
+        Rectangle rectangle = new Rectangle(4.0, 6.0);
+
+        // Calculating and displaying areas
+        System.out.println("Area of Circle: " + circle.calculateArea());
+        System.out.println("Area of Rectangle: " + rectangle.calculateArea());
+    }
+}
+```
+
+	4. **Compiling and Running:**
+   - Save these files in the corresponding directories.
+   - Open a terminal and navigate to the `src` directory.
+   - Compile the classes using the following commands:
+
+    ```bash
+    javac com/example/geometry/Circle.java
+    javac com/example/geometry/Rectangle.java
+    javac Main.java
+    ```
+
+   - Run the program:
+
+    ```bash
+    java Main
+    ```
+2. Access Specifier
+//student package
+package student;
+
+public class Student {
+    public String name = "Soumik";
+    int roll = 29;
+    protected String stream = "CSE";
+    private double cgpa = 8.95;
+    public void disp() {
+        System.out.println("Getting from Package...");
+        System.out.println("Name: " + name);
+        System.out.println("Roll: " + roll);
+        System.out.println("Stream: " + stream);
+        System.out.println("CGPA: " + cgpa);
+    }
+}
+
+// main java file
+import student.Student;
+public class pr7 {
+    public static void main(String[] args) {
+        Student ob1 = new Student();
+        ob1.disp();
+        System.out.println("Getting from Main file...");
+        System.out.println("Name: " + ob1.name);
+        System.out.println("Roll: " + ob1.roll);
+        System.out.println("Stream: " + ob1.stream);
+        System.out.println("CGPA: " + ob1.cgpa);
+    }
+}
+
+disc:
+1. **Package:**
+   - A package in Java is a way to organize related classes and interfaces into a single unit. It helps in avoiding naming conflicts, improves code modularity, and provides a namespace for the classes.
+   - Packages are defined using the `package` keyword at the beginning of a Java file. The package statement should be the first line in the file.
+   - Packages can be hierarchical, allowing the organization of related packages within one another. This hierarchy is reflected in the directory structure of the source code.
+   - To use classes from a package in another file, you need to import them using the `import` statement. This helps in referencing classes without using their fully qualified names.
+
+2. **Access Specifier:**
+   - Access specifiers in Java determine the visibility or accessibility of a class, method, or variable to other classes.
+   - There are four access specifiers in Java: `public`, `protected`, `default` (no modifier), and `private`.
+   - `public`: The class, method, or variable is accessible from any other class.
+   - `protected`: The class, method, or variable is accessible within its package and by subclasses.
+   - `default` (no modifier): The class, method, or variable is accessible only within its package.
+   - `private`: The class, method, or variable is accessible only within its own class.
+   - In the provided example, the `Student` class has members with different access specifiers (`public`, package-private/default, `protected`, and `private`). The `main` class (`pr7`) demonstrates accessing these members from both within the package and outside the package. Access specifiers control the visibility of these members in different contexts.

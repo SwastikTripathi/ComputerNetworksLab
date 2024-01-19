@@ -1,0 +1,64 @@
+QUESTION:
+    1) Write a program to create multiple threads by implementing Runnable interface.2) Use join(), isAlive(), getPriority(), SetPriority() methods.
+SOURCE CODE:
+    class MyThread implements Runnable {
+        Thread thread;
+        String name;
+        int priority;
+        MyThread(String threadName, int threadPriority) {
+            name = threadName;
+            priority = threadPriority;
+            thread = new Thread(this, name);
+            thread.setPriority(priority);
+            System.out.println("New thread: " + thread);
+            thread.start();
+        }
+        public void run() {
+            try {
+                for (int i = 5; i > 0; i--) {
+                    System.out.println(name + ": " + i);
+                    Thread.sleep(1000);
+                }
+            } catch (InterruptedException e) {
+                System.out.println(name + " interrupted.");
+            }
+            System.out.println(name + " exiting.");
+        }
+    }
+public class threa {
+    public static void main(String args[]) {
+        MyThread t1 = new MyThread("Thread One", Thread.NORM_PRIORITY);
+        MyThread t2 = new MyThread("Thread Two", Thread.MAX_PRIORITY);
+        try {
+            t1.thread.join();
+            t2.thread.join();
+        } catch (InterruptedException e) {
+            System.out.println("Main thread Interrupted");
+        }
+        System.out.println("Thread One is alive: " + t1.thread.isAlive());
+        System.out.println("Thread Two is alive: " + t2.thread.isAlive());
+        System.out.println("Thread One priority: " + t1.thread.getPriority());
+        System.out.println("Thread Two priority: " + t2.thread.getPriority());
+        t1.thread.setPriority(Thread.MAX_PRIORITY);
+        t2.thread.setPriority(Thread.NORM_PRIORITY);
+        System.out.println("Changed Thread One priority: " + t1.thread.getPriority());
+        System.out.println("Changed Thread Two priority: " + t2.thread.getPriority());
+        System.out.println("Main thread exiting.");
+    }
+}
+
+disc:
+The provided source code demonstrates the implementation of multiple threads using the `Runnable` interface. Two threads, `Thread One` and `Thread Two`, are created with different priorities. The program then utilizes methods like `join()`, `isAlive()`, `getPriority()`, and `setPriority()` to control and obtain information about the threads.
+
+In summary, the program does the following:
+
+1. Defines a `MyThread` class implementing the `Runnable` interface.
+2. Creates two threads (`t1` and `t2`) with different priorities using the `Thread` class.
+3. Uses the `join()` method to make sure the main thread waits for `t1` and `t2` to finish their execution.
+4. Utilizes `isAlive()` to check if `t1` and `t2` are still alive.
+5. Retrieves and prints the initial priorities of `t1` and `t2` using `getPriority()`.
+6. Modifies the priorities of `t1` and `t2` using `setPriority()`.
+7. Prints the changed priorities of `t1` and `t2`.
+8. Finally, the main thread prints that it is exiting.
+
+This program provides a practical example of how to create and manage multiple threads in Java and demonstrates the use of several thread-related methods.

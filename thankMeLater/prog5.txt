@@ -1,0 +1,62 @@
+1. Inheritance, Polymorphism
+
+public class pr5 {
+    public static void main(String[] args) {
+        Shape[] shapes = new Shape[2];
+        shapes[0] = new Sphere(12);
+        shapes[1] = new Cube(3);
+
+        for(Shape shape : shapes) {
+            shape.display();
+            System.out.println("Volume of the shape: " + shape.volume());
+        }
+    }
+}
+
+class Shape {
+    double dimension1, dimension2, dimension3;
+    public Shape(double dimension1, double dimension2, double dimension3) {
+        this.dimension1 = dimension1;
+        this.dimension2 = dimension2;
+        this.dimension3 = dimension3;
+    }
+    public double volume() {
+        return 0;
+    }
+
+    public final void display() {
+        System.out.println("Shape Dimensions: " + dimension1+" " +dimension2+" " +dimension3);
+    }
+}
+
+class Sphere extends Shape {
+    public Sphere(double radius) {
+        super(radius, 0, 0);
+    }
+    public double volume() {
+        return (4.0/3.0)*Math.PI*Math.pow(dimension1, 3);
+    }
+}
+class Cube extends Shape {
+    public Cube(double side) {
+        super(side, side, side);
+    }
+    public double volume() {
+        return dimension1*dimension2*dimension3;
+    }
+}
+
+disc:
+In the provided code, the concepts of inheritance and polymorphism are demonstrated.
+
+**Inheritance:**
+- The classes `Sphere` and `Cube` both extend the `Shape` class. This relationship signifies inheritance, where the derived classes (`Sphere` and `Cube`) inherit attributes and behaviors from the base class (`Shape`).
+- The `Shape` class serves as a general template for geometric shapes, and its attributes (`dimension1`, `dimension2`, `dimension3`) are inherited by the derived classes.
+- The use of `super` in the constructors of `Sphere` and `Cube` indicates the invocation of the base class constructor, initializing the shared attributes.
+
+**Polymorphism:**
+- Polymorphism is demonstrated through the use of an array of `Shape` objects (`Shape[] shapes`).
+- The array elements are instances of both `Sphere` and `Cube`, which are treated as instances of the base class `Shape`. This showcases polymorphism, as objects of different derived classes can be used interchangeably with their base class type.
+- The `for-each` loop iterates through the array of `Shape` objects and calls the `display` and `volume` methods. At runtime, the appropriate method implementation for each specific shape (either `Sphere` or `Cube`) is invoked, illustrating polymorphic behavior.
+
+In summary, inheritance allows the creation of a class hierarchy, and polymorphism enables objects of different derived classes to be treated uniformly through a common interface, showcasing flexibility and extensibility in the code.

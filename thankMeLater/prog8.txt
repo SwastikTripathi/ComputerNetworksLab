@@ -1,0 +1,160 @@
+1 & 2. Student Class and Sorting Algorithm
+import java.util.Scanner;
+class Student {
+    int roll_no;
+    String name;
+    String dept;
+    int marks;
+}
+public class pr7 {
+    static void Selection(Student ob[], int start, int end) {
+        for(int i = start; i <= end; i++) {
+            for(int j = i + 1; j<=end; j++) {
+                if(ob[i].roll_no > ob[j].roll_no) {
+                    Student temp = ob[i];
+                    ob[i] = ob[j];
+                    ob[j] = temp;
+                }
+            }
+        }
+    }
+    //code for quick sort
+    static void quickSort(Student ob[], int start, int end) {
+        if (start < end) {
+            //finding out partition index
+            int pivot = ob[end].marks;
+            int i = (start - 1);
+            for (int j = start; j < end; j++) {
+                if (ob[j].marks < pivot) {
+                    //do i + 1 and then swap with j
+                    i++;
+                    Student temp = ob[i];
+                    ob[i] = ob[j];
+                    ob[j] = temp;
+                }
+            }
+            //swapping the index i + 1 with pivot index
+            Student temp = ob[i + 1];
+            ob[i + 1] = ob[end];
+            ob[end] = temp;
+            int idx = i + 1;
+            //quick sort code using recursion
+            quickSort(ob, start, idx - 1);
+            quickSort(ob, idx + 1, end);
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Student ob[] = new Student[5];
+        //taking input of 5 students
+        System.out.println("Enter the deatils of 5 students");
+        for (int i = 0; i < 5; i++) {
+            ob[i] = new Student();
+            System.out.println("Enter the name :");
+            String n = sc.next();
+            ob[i].name = n;
+            System.out.println("Enter the roll number :");
+            int rollno = sc.nextInt();
+            ob[i].roll_no = rollno;
+            System.out.println("Enter the department :");
+            String d = sc.next();
+            ob[i].dept = d;
+            System.out.println("Enter the marks :");
+            int marks = sc.nextInt();
+            ob[i].marks = marks;
+        }
+        System.out.println();
+        // fidning out marks highest and lowest
+        String high_marks = "";
+        String low_marks = "";
+        //storing max and min value in integer to find out highest and
+        //lowest marks students
+        int mks = Integer.MIN_VALUE;
+        int low = Integer.MAX_VALUE;
+        int sum = 0;
+        for (Student s : ob) {
+            if (mks < s.marks) {
+                mks = s.marks;
+                high_marks = s.name;
+            }
+            if (low > s.marks) {
+                low = s.marks;
+                low_marks = s.name;
+            }
+            sum += s.marks;
+        }
+        //cacluating the average
+        int average = sum / 5;
+        System.out.println("Student with highest marks = " + high_marks);
+        System.out.println("Student with lowest marks = " + low_marks);
+        System.out.println("Student with marks more than average are :");
+        //printing the name of students whose marks are greater than the
+        //average marks
+        for (Student s : ob) {
+            if (s.marks > average) {
+                System.out.println(s.name);
+            }
+        }
+        System.out.println();
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Student Name is :" + ob[i].name);
+            System.out.println("Student Roll Number is :" + ob[i].roll_no);
+            System.out.println("Student Department is :" + ob[i].dept);
+            System.out.println("Student Marks is :" + ob[i].marks);
+        }
+        System.out.println();
+        //marks are sorted with quick sort
+        System.out.println("Sorting on the basis of marks");
+        //quick sort method call . Quick sort method is static
+        quickSort(ob, 0, 4);
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Student Name is :" + ob[i].name);
+            System.out.println("Student Roll Number is :" + ob[i].roll_no);
+            System.out.println("Student Department is :" + ob[i].dept);
+            System.out.println("Student Marks is :" + ob[i].marks);
+        }
+        System.out.println();
+        //marks are sorted by selection sort
+        System.out.println("Sorting on the basis of roll number");
+        Selection(ob, 0, 4);
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Student Name is :" + ob[i].name);
+            System.out.println("Student Roll Number is :" + ob[i].roll_no);
+            System.out.println("Student Department is :" + ob[i].dept);
+            System.out.println("Student Marks is :" + ob[i].marks);
+        }
+    }
+}
+
+3. Wrapper class
+
+public class pr7 {
+    public static void main(String[] args) {
+        // Auto-boxing: Converting primitive int to Integer
+        int primitiveInt = 42;
+        Integer wrappedInt = primitiveInt; // Auto-boxing
+
+        System.out.println("Auto-boxing: primitiveInt -> wrappedInt");
+        System.out.println("Primitive Int: " + primitiveInt);
+        System.out.println("Wrapped Integer: " + wrappedInt);
+
+        System.out.println("\n---------------------\n");
+
+        // Unboxing: Converting Integer to primitive int
+        Integer anotherWrappedInt = 55;
+        int anotherPrimitiveInt = anotherWrappedInt; // Unboxing
+
+        System.out.println("Unboxing: anotherWrappedInt -> anotherPrimitiveInt");
+        System.out.println("Another Wrapped Integer: " + anotherWrappedInt);
+        System.out.println("Another Primitive Int: " + anotherPrimitiveInt);
+    }
+}
+
+disc.
+**1. Student Class and Sorting Algorithm:**
+
+The code defines a `Student` class with attributes such as roll number, name, department, and marks. It includes implementations of selection sort and quicksort algorithms to sort an array of `Student` objects based on their roll numbers and marks, respectively. The program also calculates and prints information about students with the highest and lowest marks, average marks, and names of students with marks greater than the average. Finally, it displays the details of all students before and after sorting.
+
+**2. Wrapper Class:**
+
+This code snippet demonstrates the concept of auto-boxing and unboxing using the `Integer` wrapper class. Auto-boxing is shown when converting a primitive `int` to an `Integer`, and unboxing is demonstrated when converting an `Integer` back to a primitive `int`. The program prints information before and after the conversion, highlighting the seamless conversion between primitive data types and their corresponding wrapper classes. Auto-boxing simplifies the process of working with primitive types in situations that require objects, and unboxing allows extracting the primitive value from its wrapper.

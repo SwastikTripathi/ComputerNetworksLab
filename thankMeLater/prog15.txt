@@ -1,0 +1,36 @@
+Q. GregorianCalendar
+
+import java.util.GregorianCalendar;
+public class CalendarDisplay {
+    public static void main(String[] args) {
+        // Get the current date
+        GregorianCalendar calendar = new GregorianCalendar();
+        int currentDay = calendar.get(GregorianCalendar.DAY_OF_MONTH);
+        int daysInMonth = calendar.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
+        // Display the day names
+        System.out.println("Sun\tMon\tTue\tWed\tThu\tFri\tSat");
+        // Determine the day of the week for the 1st day of the month
+        calendar.set(GregorianCalendar.DAY_OF_MONTH, 1);
+        int firstDayOfWeek = calendar.get(GregorianCalendar.DAY_OF_WEEK);
+        // Print leading spaces for the 1st week
+        for (int i = 1; i < firstDayOfWeek; i++) {
+            System.out.print("\t");
+        }
+        // Print the days of the month
+        for (int day = 1; day <= daysInMonth; day++) {
+            if (day == currentDay) {
+                System.out.print(day + "*\t"); // Mark the current date
+            } else {
+                System.out.print(day + "\t");
+            }
+            // Move to the next day
+            if (calendar.get(GregorianCalendar.DAY_OF_WEEK) == GregorianCalendar.SATURDAY) {
+                System.out.println(); // Start a new line for the next week
+            }
+            calendar.add(GregorianCalendar.DAY_OF_MONTH, 1);
+        }
+    }
+}
+
+disc:
+The provided code uses the `GregorianCalendar` class to display a simple calendar for the current month in a tabular format. It highlights the current day with an asterisk. The `GregorianCalendar` class is part of the Java standard library and provides functionality for working with dates and times.

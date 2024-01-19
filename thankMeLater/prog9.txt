@@ -1,0 +1,75 @@
+1. try catch finally
+import java.util.Scanner;
+public class pr7 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        try {
+            System.out.println("Enter number 1: ");
+            int n1 = sc.nextInt();
+
+            System.out.println("Enter number 2: ");
+            int n2 = sc.nextInt();
+
+            int result = n1/n2;
+            System.out.println("Result = " + result);
+        }
+        catch(ArithmeticException e) {
+            System.out.println("Arithmetic Exception Caught: "+e.getMessage());
+            System.out.println("Cannot divide by zero. Please provide a non-zero divisor.");
+        }
+        catch(Exception e) {
+            System.out.println(" Exception Caught: "+e.getMessage());
+        }
+        finally {
+            sc.close();
+        }
+    }
+}
+
+2. user defined exception handling
+import java.util.Scanner;
+
+// User-defined exception class
+class InvalidAgeException extends Exception {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+public class pr7 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            System.out.print("Enter your age: ");
+            int age = scanner.nextInt();
+
+            // Check for invalid age
+            validateAge(age);
+
+            System.out.println("Age is valid: " + age);
+        } catch (InvalidAgeException e) {
+            System.out.println("InvalidAgeException caught: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Generic Exception caught: " + e.getMessage());
+        } finally {
+            // Closing the scanner in the finally block to ensure resources are released
+            scanner.close();
+        }
+    }
+
+    // Method to validate age and throw user-defined exception if invalid
+    private static void validateAge(int age) throws InvalidAgeException {
+        if (age < 0 || age > 120) {
+            // Throwing InvalidAgeException with a descriptive message
+            throw new InvalidAgeException("Invalid age. Please enter a valid age between 0 and 120.");
+        }
+    }
+}
+
+disc:
+1. **try-catch-finally:**
+   The provided code in `pr7` demonstrates the use of try-catch-finally for handling exceptions. It takes user input for two numbers, performs a division operation, and catches potential exceptions, such as ArithmeticException and a generic Exception. The finally block ensures that the Scanner is closed, releasing associated resources.
+
+2. **User-defined exception handling:**
+   In the second provided code snippet, a custom exception class `InvalidAgeException` is created to handle invalid age inputs. The `pr7` class takes user input for age, validates it using the `validateAge` method, and catches the custom exception. If the age is invalid (less than 0 or greater than 120), an InvalidAgeException is thrown. The finally block is used to close the Scanner to release resources.

@@ -1,0 +1,94 @@
+1. Swing GUI
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ColorButtonGUI extends JFrame {
+
+    private JPanel colorPanel; // Panel to display the selected color
+
+    public ColorButtonGUI() {
+        // Set up the main frame
+        setTitle("Color Button GUI");
+        setSize(300, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Create a panel for buttons
+        JPanel buttonPanel = new JPanel();
+
+        // Create buttons for Red, Green, Blue, and Reset
+        JButton redButton = new JButton("Red");
+        JButton greenButton = new JButton("Green");
+        JButton blueButton = new JButton("Blue");
+        JButton resetButton = new JButton("Reset");
+
+        // Add action listeners to the buttons
+        redButton.addActionListener(new ColorButtonListener(Color.RED));
+        greenButton.addActionListener(new ColorButtonListener(Color.GREEN));
+        blueButton.addActionListener(new ColorButtonListener(Color.BLUE));
+        resetButton.addActionListener(new ColorButtonListener(null)); // Null represents the default color
+
+        // Add buttons to the button panel
+        buttonPanel.add(redButton);
+        buttonPanel.add(greenButton);
+        buttonPanel.add(blueButton);
+        buttonPanel.add(resetButton);
+
+        // Create a panel to display the selected color
+        colorPanel = new JPanel();
+        colorPanel.setBackground(Color.BLACK);
+        colorPanel.setPreferredSize(new Dimension(200, 100));
+
+        // Set up the layout
+        setLayout(new BorderLayout());
+        add(buttonPanel, BorderLayout.NORTH);
+        add(colorPanel, BorderLayout.CENTER);
+    }
+
+    // ActionListener for color buttons
+    private class ColorButtonListener implements ActionListener {
+        private Color color;
+
+        public ColorButtonListener(Color color) {
+            this.color = color;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (color != null) {
+                // Set the background color of the color panel
+                colorPanel.setBackground(color);
+            } else {
+                // Reset to the default color (black)
+                colorPanel.setBackground(Color.BLACK);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        // Create and show the GUI
+        SwingUtilities.invokeLater(() -> {
+            ColorButtonGUI gui = new ColorButtonGUI();
+            gui.setVisible(true);
+        });
+    }
+}
+
+disc:
+The provided code demonstrates a simple Swing GUI application named `ColorButtonGUI`. This GUI allows users to change the background color of a panel by clicking on buttons corresponding to different colors (Red, Green, Blue) and reset the color to the default (Black) using a "Reset" button. The GUI is built using Java's Swing library and follows a basic structure with buttons and a color display panel.
+
+The main components and features of the code include:
+
+1. **JFrame**: The main frame of the GUI, representing the window.
+
+2. **JPanel**: Two panels are used - one for buttons (`buttonPanel`) and one to display the selected color (`colorPanel`).
+
+3. **JButton**: Buttons for Red, Green, Blue, and Reset actions.
+
+4. **ActionListener**: The `ColorButtonListener` class implements the `ActionListener` interface to handle button click events. It changes the background color of the color panel based on the selected color or resets it to the default.
+
+5. **SwingUtilities**: The `SwingUtilities.invokeLater` method is used to ensure that the GUI is created and displayed on the Event Dispatch Thread (EDT), which is the thread responsible for handling Swing events.
+
+Overall, this code provides a simple example of how to create a basic Swing GUI with interactive buttons to manipulate the appearance of a panel.
